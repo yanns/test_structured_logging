@@ -1,11 +1,13 @@
-# test_structured_logging
-Test structure logging on GCP (Stackdriver) with Scala
+# Test structured logging on GCP
+
+Test structure logging on GCP (Stackdriver & Kubernetes) with Scala
 
 ## Problem with "normal" logging
 
-Stackdriver parses the stdout and stderr to ingest logs. But this has several limitations:
+With a standard Kubernetes cluster on the Google Cloud platform, Stackdriver parses the stdout and stderr of each containers to ingest logs.
+But this has several limitations:
 
-- we can only have `INFO` (stdout) or `ERROR` (stderr) levels
+- we can only use `INFO` (stdout) or `ERROR` (stderr) levels
 - logs with a new line (like with a stacktrace) are parsed in different items (one per line).
 
 ## Solution proposed by Stackdriver
