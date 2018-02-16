@@ -14,3 +14,6 @@ Using a special logback appender:
 
 https://cloud.google.com/logging/docs/setup/java#wzxhzdk57wzxhzdk58logback_appender_for_product_name
 
+With a very simple configuration, we can use all different severities:
+
+![Example of structure logs][structured logs.png]
