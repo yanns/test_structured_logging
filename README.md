@@ -10,7 +10,7 @@ Stackdriver parses the stdout and stderr to ingest logs. But this has several li
 
 ## Solution proposed by Stackdriver
 
-Using a special logback appender:
+Using a special logback appender `com.google.cloud.logging.logback.LoggingAppender`:
 
 https://cloud.google.com/logging/docs/setup/java#wzxhzdk57wzxhzdk58logback_appender_for_product_name
 
@@ -46,3 +46,30 @@ java.lang.Exception: boom!!
     at java.base/java.lang.Thread.run(Thread.java:844)"
 }
 ```
+
+### Limitations
+
+- duplicated log entries
+
+If we use only the special logback appender for google cloud, then we have no logs on stdout/stderr.
+But if we also use stdout/stderr, then the logs are ingested 2 times, leading to duplicated log entries. ;(
+
+- library in beta - some crucial fields are missing
+
+Some crucial information for the environment are missing:
+```
+resource: {
+  labels: {
+   cluster_name: ""
+   container_name: ""
+   instance_id: ""
+   namespace_id: ""
+   pod_id: ""
+   project_id: "<project ID>"
+   zone: "<zone>"
+  }
+  type: "container"
+ }
+```
+
+https://github.com/GoogleCloudPlatform/google-cloud-java/issues/2912
