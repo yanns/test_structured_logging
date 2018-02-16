@@ -8,6 +8,7 @@
     </appender>
 
     <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
+        <enhancer>example.ExampleLoggingEnhancer</enhancer> <!-- Optional -->
     </appender>
 
     <root level="info">

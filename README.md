@@ -18,16 +18,31 @@ https://cloud.google.com/logging/docs/setup/java#wzxhzdk57wzxhzdk58logback_appen
 
 With a very simple configuration, we can use all different severities:
 
-![Example of structure logs][structured logs.png]
+```
+{
+ labels: {…}
+ resource: {…}
+ severity: "INFO"
+ textPayload: "hello info"
+}
+
+{
+ labels: {…}
+ resource: {…}
+ severity: "WARNING"
+ textPayload: "hello warn"
+}
+```
+
 
 Stacktraces are handled the correct way:
 ```
 {
- insertId: "1cu73vjg12p4dtx"
  labels: {
   levelName: "ERROR"
   levelValue: "40000"
  }
+ resource: {…}
  severity: "ERROR"
  textPayload: "there was an exception
 java.lang.Exception: boom!!
@@ -48,6 +63,24 @@ java.lang.Exception: boom!!
     at java.base/java.lang.Thread.run(Thread.java:844)"
 }
 ```
+
+### Logging enhancement
+
+Using a [LoggingEnhancer](src/main/scala/example/ExampleLoggingEnhancer.scala), it's possible to add custom key/values:
+
+```
+ {
+ labels: {
+  levelName: "INFO"
+  levelValue: "20000"
+  my-key: "my value"
+ }
+ resource: {…}
+ severity: "INFO"
+ textPayload: "hello info"
+}
+```
+
 
 ### Limitations
 
